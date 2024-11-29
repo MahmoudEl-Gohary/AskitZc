@@ -6,6 +6,7 @@ load_dotenv() # Load environment variables from .env file
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+DEBUG = os.getenv('DEBUG') == 'True'  # Convert string 'True' to boolean True
 
 
 # Quick-start development settings - unsuitable for production
@@ -64,8 +65,6 @@ WSGI_APPLICATION = 'askit_zc.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
-DEBUG = os.getenv('DEBUG') == 'True'  # Convert string 'True' to boolean True
 
 DATABASES = {
     'default': {
