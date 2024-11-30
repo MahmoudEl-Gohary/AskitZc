@@ -17,14 +17,9 @@ import { RouterLink } from 'vue-router';
 
       <!-- Buttons -->
       <div class="flex flex-col sm:flex-row gap-6 sm:gap-8 justify-center w-full">
-        <RouterLink to="/join">
+        <RouterLink to="/signup">
           <button class="bg-[#00b4d1] hover:bg-[#0099b3] text-white font-bold py-3 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg">
             Join Now
-          </button>
-        </RouterLink>
-        <RouterLink to="/ask">
-          <button class="border-2 border-[#00b4d1] text-[#00b4d1] font-bold py-3 px-8 rounded-xl hover:bg-[#00b4d1] hover:text-white transition-all duration-300 transform hover:scale-105">
-            Ask Instantly
           </button>
         </RouterLink>
       </div>
@@ -46,7 +41,7 @@ export default {
 
 /* Background Color and Gradient */
 #hero {
-  background-image: url('../assets/Images/hmn11.jpg'); /* Background image */
+  background-image: url('../../assets/Images/hmn11.jpg'); /* Background image */
   background-size: cover; /* Ensures the image covers the entire section */
   background-position: center; /* Centers the background image */
   background-repeat: no-repeat; /* Prevents the image from repeating */

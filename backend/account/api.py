@@ -2,6 +2,16 @@ from .forms import SignupForm
 from django.http import JsonResponse
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
 
+
+@api_view(['GET'])
+def me(request):
+    return JsonResponse({
+        'id': request.user.id,
+        'name': request.user.name,
+        'email': request.user.email,
+    })
+    
+
 @api_view(['POST'])
 @authentication_classes([])
 @permission_classes([])

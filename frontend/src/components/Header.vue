@@ -29,9 +29,9 @@ const scrollToSection = (sectionId: string) => {
         <a @click="scrollToSection('contact')" class="text-white hover:text-[#fff2f2] cursor-pointer transition-all duration-300">Contact</a>
 
         <!-- Action Button -->
-        <RouterLink to="/ask">
+        <RouterLink to="/login">
           <button class="bg-[#00b4d1] text-white hover:bg-[#0099b3] rounded-lg px-6 py-2 font-medium transition-all duration-300 transform hover:scale-105 shadow-lg">
-            {{ isLoggedIn ? "Profile" : "Ask Now" }}
+            Sign In
           </button>
         </RouterLink>
       </nav>
