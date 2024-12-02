@@ -56,7 +56,7 @@ export default {
                     .then(response => {
                         this.userStore.setUserInfo(response.data)
 
-                        this.$router.push('/profile') // Redirect to the profile page
+                        this.$router.push('/feed') // Redirect to the profile page
                     })
                     .catch(error => {
                         console.log('error', error)

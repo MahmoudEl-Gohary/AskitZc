@@ -1,10 +1,34 @@
-<script setup lang="ts">
-const scrollToSection = (sectionId: string) => {
-  const element = document.getElementById(sectionId);
-  if (element) {
-    element.scrollIntoView({ behavior: 'smooth' });
+<script>
+  import axios from 'axios'
+  import Toast from '@/components/Toast.vue'
+  import { useUserStore } from '@/stores/user'
+  import { onBeforeMount } from 'vue'
+
+  export default {
+    setup() {
+      const userStore = useUserStore()
+      onBeforeMount(() => {
+        userStore.initStore()
+
+        const token = userStore.user.access
+        console.log('id', userStore.user.id)
+
+        if (token) {
+          axios.defaults.headers.common["Authorization"] = "Bearer " + token
+        } else {
+          axios.defaults.headers.common["Authorization"] = ""
+        }
+      })
+
+      return {
+        userStore,
+      }
+    },
+
+    components: {
+      Toast
+    }
   }
-};
 </script>
 
 <template>
@@ -15,7 +39,11 @@ const scrollToSection = (sectionId: string) => {
         <span class="text-3xl font-semibold text-white tracking-tight">askit.zc</span>
       </div>
       <nav class="flex items-center space-x-6">
-          <a href="/profile" class="text-white hover:text-[#fff2f2] cursor-pointer transition-all duration-300">Profile</a>
+        
+        <router-link :to="{ name: 'profile', params: { id: userStore.user.id } }" class="text-white hover:text-[#fff2f2] cursor-pointer transition-all duration-300">
+          Profile
+        </router-link>
+        <!-- <a href="/profile" class="text-white hover:text-[#fff2f2] cursor-pointer transition-all duration-300">Profile</a> -->
           <a href="/feed" class="text-white hover:text-[#fff2f2] cursor-pointer transition-all duration-300">Feed</a>
           <a href="/search" class="text-white hover:text-[#fff2f2] cursor-pointer transition-all duration-300">Search</a>
           <a href="/notifications" class="text-white hover:text-[#fff2f2] cursor-pointer transition-all duration-300">Notifications</a>
