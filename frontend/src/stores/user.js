@@ -10,6 +10,8 @@ export const useUserStore = defineStore({
             id: null,
             name: null,
             email: null,
+            bio: null,
+            description: null,
             access: null,
             refresh: null,
             avatar: null
@@ -27,6 +29,8 @@ export const useUserStore = defineStore({
                 this.user.refresh = localStorage.getItem('user.refresh')
                 this.user.id = localStorage.getItem('user.id')
                 this.user.name = localStorage.getItem('user.name')
+                this.user.bio = localStorage.getItem('user.bio')
+                this.user.description = localStorage.getItem('user.description')
                 this.user.email = localStorage.getItem('user.email')
                 this.user.avatar = localStorage.getItem('user.avatar')
                 this.user.isAuthenticated = true
@@ -60,6 +64,8 @@ export const useUserStore = defineStore({
             this.user.name = null
             this.user.email = null
             this.user.avatar = null
+            this.user.bio = null
+            this.user.description = null
 
             localStorage.setItem('user.access', '')
             localStorage.setItem('user.refresh', '')
@@ -67,6 +73,8 @@ export const useUserStore = defineStore({
             localStorage.setItem('user.name', '')
             localStorage.setItem('user.email', '')
             localStorage.setItem('user.avatar', '')
+            localStorage.setItem('user.bio', '')
+            localStorage.setItem('user.description', '')
         },
 
         setUserInfo(user) {
@@ -76,11 +84,15 @@ export const useUserStore = defineStore({
             this.user.name = user.name
             this.user.email = user.email
             this.user.avatar = user.avatar
+            this.user.bio = user.bio
+            this.user.description = user.description
 
             localStorage.setItem('user.id', this.user.id)
             localStorage.setItem('user.name', this.user.name)
             localStorage.setItem('user.email', this.user.email)
             localStorage.setItem('user.avatar', this.user.avatar)
+            localStorage.setItem('user.bio', this.user.bio)
+            localStorage.setItem('user.description', this.user.description)
 
             console.log('User', this.user)
         },

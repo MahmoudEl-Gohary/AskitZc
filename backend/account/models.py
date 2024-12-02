@@ -26,6 +26,8 @@ class CustomUserManager(UserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=255, blank=False)
+    bio = models.TextField(blank=True) # bio is short for biography
+    description = models.CharField(max_length=255, blank=True) # description is a short description of the user
     email = models.EmailField(unique=True, blank=False)
     acatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
     

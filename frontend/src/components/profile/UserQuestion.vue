@@ -24,7 +24,6 @@ export default {
             user: {
                 id: ''
             },
-            can_send_friendship_request: null,
         }
     },
 
