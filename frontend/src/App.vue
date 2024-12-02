@@ -1,6 +1,5 @@
 <script>
   import { RouterView } from 'vue-router'
-  import Header from './components/Header.vue'
   import Footer from './components/Footer.vue'
   import axios from 'axios'
   import Toast from '@/components/Toast.vue'
@@ -18,7 +17,6 @@
 
       components: {
           Toast,
-          Header,
           Footer
       },
 
@@ -38,7 +36,6 @@
 
 <template>
   <div class="min-h-screen bg-gray-50">
-    <Header />
     <main class="w-full"> <!-- Ensure full width here -->
       <RouterView />
     </main>

@@ -19,9 +19,6 @@ const user = ref({
         alt="Cover"
         class="w-full h-full object-cover"
       />
-      <button class="absolute top-4 right-4 bg-white text-gray-700 px-4 py-2 rounded-lg shadow hover:bg-gray-50">
-        Edit Cover
-      </button>
     </div>
 
     <!-- Profile Info -->
