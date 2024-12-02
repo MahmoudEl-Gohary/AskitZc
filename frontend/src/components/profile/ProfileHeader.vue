@@ -25,7 +25,7 @@
           </div>
             <div class="mt-4 sm:mt-0 text-center sm:text-left">
               <!-- edit here -->
-                <h1 class="text-2xl font-bold text-gray-900">{{ userStore.user.name }}</h1>
+                <h1 class="text-2xl font-bold text-gray-900">{{ user.name }}</h1>
                 <p class="text-gray-500">@DSAI_202201124</p>
                 <p class="mt-1 text-gray-600">Data Scientist | Football player</p>
          </div>
@@ -59,8 +59,7 @@ export default {
             user: {
                 id: ''
             },
-            can_send_friendship_request: null,
-        }
+            }
     },
 
     mounted() {
