@@ -1,65 +1,52 @@
-<script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import axios from 'axios';
-import signedHeader from '../components/signedHeader.vue';
+<script>
+import axios from 'axios'
+import signedHeader from '../components/signedHeader.vue'
+// import PeopleYouMayKnow from '../components/PeopleYouMayKnow.vue'
+// import Trends from '../components/Trends.vue'
+// import FeedItem from '../components/FeedItem.vue'
+// import FeedForm from '../components/FeedForm.vue'
 
-// General feed data (questions and answers)
-const feedItems = ref<Array<{
-  id: number;
-  title: string;
-  content: string;
-  votes: number;
-  answers: number;
-  date: string;
-  author: string;
-  type: 'question' | 'answer';
-}>>([]);
+export default {
+    name: 'FeedView',
 
-// Fetch feed data from an API (mocked for now)
-const fetchFeed = async () => {
-  try {
-    // Mock API response
-    feedItems.value = [
-      {
-        id: 1,
-        title: 'How to implement Vue 3 Composition API?',
-        content: 'I am trying to understand the best practices...',
-        votes: 15,
-        answers: 3,
-        date: '2024-03-15',
-        author: 'John Doe',
-        type: 'question',
-      },
-      {
-        id: 2,
-        title: 'How to handle authentication in Vue?',
-        content: 'You can implement authentication using Vue Router guards...',
-        votes: 7,
-        answers: 1,
-        date: '2024-03-12',
-        author: 'Jane Smith',
-        type: 'answer',
-      },
-      {
-        id: 3,
-        title: 'Vite vs Webpack for Vue applications',
-        content: 'What are the main differences between these build tools?',
-        votes: 8,
-        answers: 5,
-        date: '2024-03-10',
-        author: 'Alice Johnson',
-        type: 'question',
-      },
-    ];
-  } catch (error) {
-    console.error('Failed to fetch feed data:', error);
-  }
-};
+    components: {
+        signedHeader,
+    //     PeopleYouMayKnow,
+    //     Trends,
+    //     FeedItem,
+    //     FeedForm
+    },
 
-// Fetch feed data on component mount
-onMounted(() => {
-  fetchFeed();
-});
+    data() {
+        return {
+            posts: [],
+            body: '',
+        }
+    },
+
+    mounted() {
+        this.getFeed()
+    },
+
+    methods: {
+        getFeed() {
+            axios
+                .get('/api/posts/')
+                .then(response => {
+                    console.log('data', response.data)
+
+                    this.posts = response.data
+                })
+                .catch(error => {
+                    console.log('error', error)
+                })
+        },
+
+        deletePost(id) {
+            this.posts = this.posts.filter(post => post.id !== id)
+        },
+    }
+}
 </script>
 
 <template>
@@ -71,20 +58,20 @@ onMounted(() => {
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <!-- Feed Items -->
         <div
-          v-for="item in feedItems"
-          :key="item.id"
+          v-for="item in posts"
+          v-bind:key="item.id"
           class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group"
         >
           <!-- Header -->
           <div
             class="p-4 bg-gradient-to-r from-blue-500 from-[#00b4d1] to-[#00a1b5] text-white text-sm flex justify-between items-center"
           >
-            <span>{{ item.author }}</span>
+            <span>{{ item.created_by.name }}</span>
             <span
               class="px-3 py-1 rounded-full bg-white text-xs font-semibold text-gray-800"
-              :class="item.type === 'question' ? 'text-blue-600' : 'text-green-600'"
+              :class='text-blue-600'
             >
-              {{ item.type === 'question' ? 'Question' : 'Answer' }}
+              {{ item.created_at_formated}} ago
             </span>
           </div>
 
@@ -94,15 +81,15 @@ onMounted(() => {
               {{ item.title }}
             </h2>
             <p class="text-gray-600 line-clamp-3">
-              {{ item.content }}
+              {{ item.body }}
             </p>
           </div>
 
           <!-- Footer -->
           <div class="p-4 bg-gray-50 border-t text-sm text-gray-500 flex justify-between items-center">
             <div>
-              <span class="font-semibold">{{ item.votes }} votes</span>
-              <span v-if="item.type === 'question'"> • {{ item.answers }} answers</span>
+              <!-- <span class="font-semibold">{{ item.votes }} votes</span>
+              <span > • {{ item.answers }} answers</span> -->
             </div>
             <span>{{ item.date }}</span>
           </div>
